@@ -64,38 +64,38 @@ def load_data(mode="train"):
             fpaths, text_lengths, texts = [], [], []
             transcript = os.path.join(hp.data, 'transcript.csv')
             lines = codecs.open(transcript, 'r', 'utf-8').readlines()
-#             for line in lines:
-#                 #fname, _, text, is_inside_quotes, duration = line.strip().split("|")
-#                 #duration = float(duration)
-#                 #if duration > 10. : continue
-#                 fname, text = line.strip().split("|")
-                
-#                 fpath = os.path.join(hp.data, fname)
-#                 fpaths.append(fpath)
-
-#                 text += "E"  # E: EOS
-#                 text = [char2idx[char] for char in text]
-#                 text_lengths.append(len(text))
-#                 texts.append(np.array(text, np.int32).tostring())
             for line in lines:
                 #fname, _, text, is_inside_quotes, duration = line.strip().split("|")
                 #duration = float(duration)
                 #if duration > 10. : continue
                 fname, text = line.strip().split("|")
-                text = text.lower()
-                text = text.replace('-', ' ')
-                numbers = re.search('[0-9]+', text)
-                test1 = re.search('&',text)
+                
+                fpath = os.path.join(hp.data, fname)
+                fpaths.append(fpath)
 
-                if numbers is None and test1 is None:
-                    fpath = os.path.join(hp.data, fname)
-                    fpaths.append(fpath)
+                text += "E"  # E: EOS
+                text = [char2idx[char] for char in text]
+                text_lengths.append(len(text))
+                texts.append(np.array(text, np.int32).tostring())
+#             for line in lines:
+#                 #fname, _, text, is_inside_quotes, duration = line.strip().split("|")
+#                 #duration = float(duration)
+#                 #if duration > 10. : continue
+#                 fname, text = line.strip().split("|")
+#                 text = text.lower()
+#                 text = text.replace('-', ' ')
+#                 numbers = re.search('[0-9]+', text)
+#                 test1 = re.search('&',text)
 
-                    text += "E"  # E: EOS
-                    #text = text_normalize(text) + "E"  # E: EOS
-                    text = [char2idx[char] for char in text]
-                    text_lengths.append(len(text))
-                    texts.append(np.array(text, np.int32).tostring())
+#                 if numbers is None and test1 is None:
+#                     fpath = os.path.join(hp.data, fname)
+#                     fpaths.append(fpath)
+
+#                     text += "E"  # E: EOS
+#                     #text = text_normalize(text) + "E"  # E: EOS
+#                     text = [char2idx[char] for char in text]
+#                     text_lengths.append(len(text))
+#                     texts.append(np.array(text, np.int32).tostring())
 
             return fpaths, text_lengths, texts
 
