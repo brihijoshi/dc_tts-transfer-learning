@@ -166,11 +166,14 @@ if __name__ == '__main__':
     num = int(sys.argv[1])
 
     g = Graph(num=num); print("Training Graph loaded")
+    
+    
+    #g = Graph(num=num); print("Training Graph loaded")
 
     logdir = hp.logdir + "-" + str(num)
     sv = tf.train.Supervisor(logdir=logdir, save_model_secs=0, global_step=g.global_step)
     #with sv.managed_session() as sess:
-    with sv.managed_session(config = tf.ConfigProto(allow_soft_placement=True)) as sess:
+    with sv.managed_session(config = tf.ConfigProto(log_device_placement=True)) as sess:
         sv.saver.restore(sess, tf.train.latest_checkpoint(hp.restoredir + "-" + str(num)))
         while 1:
             for _ in tqdm(range(g.num_batch), total=g.num_batch, ncols=70, leave=False, unit='b'):

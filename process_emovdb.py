@@ -1,5 +1,8 @@
 import os
 import shutil
+import string
+import re 
+
 
 PATH = "../emovdb/"
 
@@ -16,12 +19,22 @@ for speaker in speakers:
             emotions[emotion] = []
         emotions[emotion].append(speaker_path+emotion)
 
-PROCESSED_DIR = '../processed_emovdb'
+PROCESSED_DIR = '../processed_emovdb_anger'
 if os.path.isdir(PROCESSED_DIR) == False:
     os.mkdir(PROCESSED_DIR)
     os.mkdir(PROCESSED_DIR+'/wavs')
 
 TRANSCRIPT_PATH = '../cmuarctic.data'
+
+
+def remove_punct(string): 
+    punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+    for x in string.lower(): 
+        if x in punctuations: 
+            string = string.replace(x, "") 
+                                          
+    return string.lower()
+
 
 def process_transcript(transcript):
 
@@ -37,7 +50,7 @@ def process_transcript(transcript):
         if label[0] == 'b':
             continue
         label = label[1:]
-        label_to_transcript[label] = sent
+        label_to_transcript[label] = remove_punct(sent)
 
     return label_to_transcript
 
@@ -45,6 +58,9 @@ label_to_transcript = process_transcript(TRANSCRIPT_PATH)
 
 list_transcript_files = []
 for emotion in emotions.keys():
+    # Remove this to preprocess on all emotions
+    if emotion != 'anger':
+        continue
     emotion_paths = emotions[emotion]
     count_emotion = 0
     for path in emotion_paths:

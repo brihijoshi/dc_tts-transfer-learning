@@ -70,7 +70,7 @@ def load_data(mode="train"):
                 #if duration > 10. : continue
                 fname, text = line.strip().split("|")
                 
-                fpath = os.path.join(hp.data, fname)
+                fpath = os.path.join(hp.data,"wavs", fname+".wav")
                 fpaths.append(fpath)
 
                 text += "E"  # E: EOS
@@ -129,8 +129,8 @@ def get_batch():
                 fname = os.path.basename(fpath)
                 #mel = "mels/{}".format(fname.replace("wav", "npy"))
                 #mag = "mags/{}".format(fname.replace("wav", "npy"))
-                mel = "/mels/{}".format(fname.decode("utf-8").replace("wav", "npy"))
-                mag = "/mags/{}".format(fname.decode("utf-8").replace("wav", "npy"))
+                mel = "../output/mels/{}".format(fname.decode("utf-8").replace("wav", "npy"))
+                mag = "../output/mags/{}".format(fname.decode("utf-8").replace("wav", "npy"))
                 return fname, np.load(mel), np.load(mag)
 
             fname, mel, mag = tf.py_func(_load_spectrograms, [fpath], [tf.string, tf.float32, tf.float32])
