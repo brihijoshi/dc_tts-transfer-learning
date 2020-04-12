@@ -36,7 +36,7 @@ class Hyperparams:
 
     # data
     #data = "/data/private/voice/LJSpeech-1.0"
-    data = "/data/private/voice/scarlett"
+    data = "../processed_emovdb"
     test_data = 'test_sentences.txt'
     vocab = "PE abcdefghijklmnopqrstuvwxyz'.?" # P: Padding, E: EOS.
     max_N = 180 # Maximum number of characters.
@@ -44,10 +44,10 @@ class Hyperparams:
 
     # training scheme
     lr = 0.001 # Initial learning rate.
-    logdir = "/output/logdir/scarjo"
+    logdir = "../output/logdir/"
     #restoredir = "/output2/logdir/scarjo"
-    restoredir = "/output2/logdir/LJ01" # location of pre-trained LJSpeech-1.0 model w/ checkpoint
-    sampledir = '/output/samples'
+    restoredir = "../LJ01-1" # location of pre-trained LJSpeech-1.0 model w/ checkpoint
+    sampledir = '../output/samples'
     B = 32
     num_iterations = 2000000
 
@@ -68,8 +68,8 @@ class Hyperparams:
                     'SSRN/C_13/',
                     'SSRN/C_14/',
                     'SSRN/C_15/',
-                    'SSRN/C_16/',
-                    'Text2Mel/TextEnc/embed_1/',
+                    'SSRN/C_16/'
+                   """ 'Text2Mel/TextEnc/embed_1/',
                     'Text2Mel/TextEnc/C_2/',
                     'Text2Mel/TextEnc/C_3/',
                     'Text2Mel/TextEnc/HC_4/',
@@ -107,5 +107,5 @@ class Hyperparams:
                     'Text2Mel/AudioDec/C_8/',
                     'Text2Mel/AudioDec/C_9/',
                     'Text2Mel/AudioDec/C_10/',
-                    'Text2Mel/AudioDec/C_11/'
+                    'Text2Mel/AudioDec/C_11/'"""
                     ]
