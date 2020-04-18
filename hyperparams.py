@@ -49,6 +49,7 @@ class Hyperparams:
     restoredir = "../LJ01" # location of pre-trained LJSpeech-1.0 model w/ checkpoint
     sampledir = '../output/samples'
     B = 32
+    #B = 43
     num_iterations = 2000000
 
     # select the trainable layers for transfer learning (i.e. remove the layers you want to fix during transfer learning)
