@@ -5,6 +5,10 @@ import re
 
 
 PATH = "../emovdb/"
+PROCESSED_DIR = '../processed_emovdb_anger'
+TRANSCRIPT_PATH = '../cmuarctic.data'
+
+
 
 emotions = {}
 
@@ -19,12 +23,10 @@ for speaker in speakers:
             emotions[emotion] = []
         emotions[emotion].append(speaker_path+emotion)
 
-PROCESSED_DIR = '../processed_emovdb_anger'
 if os.path.isdir(PROCESSED_DIR) == False:
     os.mkdir(PROCESSED_DIR)
     os.mkdir(PROCESSED_DIR+'/wavs')
 
-TRANSCRIPT_PATH = '../cmuarctic.data'
 
 
 def remove_punct(string): 
